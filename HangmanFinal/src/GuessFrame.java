@@ -32,9 +32,11 @@ public class GuessFrame extends JFrame {
 	private String selectedWord;
 	private JTextArea incorrectTextArea;
 	private JTextArea correctTextArea;
+	private int counter;
 	private ArrayList<Character> lettersArray;
 	private JTextField wordGuessField;
 	private JButton letterGuessButton;
+	private HangmanComponent draw;
 	private String invWord;
 	private AudioClip correctSound;
 	private AudioClip incorrectSound;
@@ -88,7 +90,7 @@ public class GuessFrame extends JFrame {
 			
 			//Using a random generator, pick one of the words
 			Random rand = new Random();		
-			int gameWord = rand.nextInt(28);
+			int gameWord = rand.nextInt(30);
 			//Set the random word as selectedWord
 			this.selectedWord = randomWords.get(gameWord);			
 		}
@@ -367,6 +369,8 @@ public class GuessFrame extends JFrame {
 		//Initialize variables from other methods
 		this.selectedWord = generateWord();		
 		this.lettersArray = words(); 
+		//The constructor also takes in a HangmanComponent class called draw so this frame can talk to the HangmanFrame
+		this.draw = draw;
 		//Code for creating the content pane to contain all of the GUI elements
 		setType(Type.UTILITY);
 		setTitle("HANGMAN");		
@@ -377,7 +381,7 @@ public class GuessFrame extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{60, 68, 76, 69, 73, 62, 71, 56, 57, 64, 65, 58, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 51, 41, 39, 0, 98, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 51, 41, 39, 0, 73, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
@@ -1488,10 +1492,10 @@ public class GuessFrame extends JFrame {
 		correctTextArea.setEditable(false);
 		correctTextArea.setLineWrap(true);
 		GridBagConstraints gbc_correctTextArea = new GridBagConstraints();
-		gbc_correctTextArea.gridwidth = 3;
+		gbc_correctTextArea.gridwidth = 2;
 		gbc_correctTextArea.insets = new Insets(0, 0, 0, 5);
 		gbc_correctTextArea.fill = GridBagConstraints.BOTH;
-		gbc_correctTextArea.gridx = 3;
+		gbc_correctTextArea.gridx = 4;
 		gbc_correctTextArea.gridy = 5;
 		contentPane.add(correctTextArea, gbc_correctTextArea);
 		//For each letter in the selected word, add a star to the correctTextArea
